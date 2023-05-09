@@ -6,6 +6,9 @@ const boardWidth = 560;
 
 let currentPosition = userStart;
 
+const ballStart = [270,40];
+let ballCurrentPosition = ballStart
+
 //create block
 class block {
     constructor(xAxis, yAxis){
@@ -62,6 +65,13 @@ function drawUser(){
     user.style.bottom = currentPosition[1] + 'px';
 }
 
+//draw the ball
+function drawBall(){
+    ball.style.left = ballCurrentPosition[0] + 'px'
+    ball.style.bottom = ballCurrentPosition[1] + 'px' 
+}
+
+
 //movimg user
 function moveUser(e){
     switch(e.key){
@@ -83,3 +93,20 @@ function moveUser(e){
 }
 
 document.addEventListener('keydown', moveUser)
+
+//add a ball
+const ball = document.createElement('div');
+ball.classList.add('ball')
+ball.style.left = ballCurrentPosition[0] + 'px'
+ball.style.bottom = ballCurrentPosition[1] + 'px'
+drawBall()
+grid.appendChild(ball)
+
+//move the ball
+function moveBall(){
+    ballCurrentPosition[0] += 2
+    ballCurrentPosition[1] += 2
+    drawBall()
+}
+
+setInterval(moveBall, 30)
